@@ -2,8 +2,7 @@ import * as React from 'react';
 import { fetchMessage } from './api/MessagesApi';
 import './style.css';
 
-export default function App() {
-  const [x, setX] = React.useState(0);
+const useMessage = (x: number) => {
   const [message, setMessage] = React.useState('');
 
   React.useEffect(() => {
@@ -13,6 +12,12 @@ export default function App() {
     });
     return () => abortController.abort();
   }, [x]);
+  return message;
+};
+
+export default function App() {
+  const [x, setX] = React.useState(0);
+  const message = useMessage(x);
 
   return (
     <div>
